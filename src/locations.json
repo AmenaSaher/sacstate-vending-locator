@@ -1,0 +1,45 @@
+[
+  {
+    "id": "airc-vending",
+    "place": "AIRC Vending Machine",
+    "coordinates": [38.55895958406357, -121.42287375867112],
+    "description": "2nd floor behind elevators",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "mendocino-hall",
+    "place": "Mendocino Hall Vending Machine",
+    "coordinates": [38.5533, -121.42287375867112],
+    "description": "1st floor near elevators",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "union-microwave",
+    "place": "Student Union Microwave",
+    "coordinates": [38.5607, -121.4232],
+    "description": "Near food court seating",
+    "type": ["microwave"],
+    "photos":[]
+  },
+  {
+    "id": "union-vending",
+    "place": "Student Union Vending Machine",
+    "coordinates": [38.5603, -121.4232],
+    "description": "Near food court seating",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "riverside-vending",
+    "place": "Riverside Hall Vending Machines",
+    "coordinates": [38.56275, -121.42175],
+    "description": "In the corner beside the elevators",
+    "type": ["vending"],
+    "photos": [
+    "/photos/riverside-1.jpeg",
+    "/photos/riverside-2.jpeg"
+  ]
+  }
+]
