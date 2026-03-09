@@ -8,6 +8,62 @@
     "photos":[]
   },
   {
+    "id": "alpine-vending",
+    "place": "Alpine Hall Vending Machine",
+    "coordinates": [38.55888, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "amador-vending",
+    "place": "Amador Hall Vending Machine",
+    "coordinates": [38.555, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "brighton-vending",
+    "place": "Brighton Hall Vending Machine",
+    "coordinates": [38.57775, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "douglass-vending",
+    "place": "Douglass Hall Vending Machine",
+    "coordinates": [38.52285, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "lassen-vending",
+    "place": "Lassen Hall Vending Machine",
+    "coordinates": [38.54444, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "library-vending",
+    "place": "Library Vending Machine",
+    "coordinates": [38.4555, -121.42287375867112],
+    "description": "-",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "library-microwave",
+    "place": "Library Microwave",
+    "coordinates": [38.4555, -121.42287375867112],
+    "description": "-",
+    "type": ["microwave"],
+    "photos":[]
+  },
+  {
     "id": "mendocino-hall",
     "place": "Mendocino Hall Vending Machine",
     "coordinates": [38.5533, -121.42287375867112],
@@ -16,18 +72,10 @@
     "photos":[]
   },
   {
-    "id": "union-microwave",
-    "place": "Student Union Microwave",
-    "coordinates": [38.5607, -121.4232],
-    "description": "Near food court seating",
-    "type": ["microwave"],
-    "photos":[]
-  },
-  {
-    "id": "union-vending",
-    "place": "Student Union Vending Machine",
-    "coordinates": [38.5603, -121.4232],
-    "description": "Near food court seating",
+    "id": "placer-hall",
+    "place": "Placer Hall Vending Machine",
+    "coordinates": [38.58883, -121.42287375867112],
+    "description": "1st floor near elevators",
     "type": ["vending"],
     "photos":[]
   },
@@ -41,5 +89,45 @@
     "/photos/riverside-1.jpeg",
     "/photos/riverside-2.jpeg"
   ]
+  },
+  {
+    "id": "sacramento-hall",
+    "place": "Sacramento Hall Vending Machine",
+    "coordinates": [38.6777, -121.42287375867112],
+    "description": "1st floor near elevators",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "tahoe-hall",
+    "place": "Tahoe Hall Vending Machine",
+    "coordinates": [38.5533, -121.42287375867112],
+    "description": "1st floor near elevators",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "the-well",
+    "place": "The WELL Vending Machine",
+    "coordinates": [38.5533, -121.42287375867112],
+    "description": "1st floor near elevators",
+    "type": ["vending"],
+    "photos":[]
+  },
+  {
+    "id": "union-microwave",
+    "place": "University Union Microwave",
+    "coordinates": [38.5607, -121.4232],
+    "description": "Near food court seating",
+    "type": ["microwave"],
+    "photos":[]
+  },
+  {
+    "id": "union-vending",
+    "place": "University Union Vending Machine",
+    "coordinates": [38.5603, -121.4232],
+    "description": "Near food court seating",
+    "type": ["vending"],
+    "photos":[]
   }
 ]
