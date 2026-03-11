@@ -2,132 +2,98 @@
   {
     "id": "airc-vending",
     "place": "AIRC Vending Machine",
-    "coordinates": [38.55895958406357, -121.42287375867112],
+    "coordinates": [38.5587259, -121.4228353],
     "description": "2nd floor behind elevators",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/airc-1.jpeg","/photos/airc-2.jpeg",
+              "/photos/airc-3.jpeg","/photos/airc-4.jpeg",
+              "/photos/airc-5.jpeg"]
   },
   {
     "id": "alpine-vending",
     "place": "Alpine Hall Vending Machine",
-    "coordinates": [38.55888, -121.42287375867112],
-    "description": "-",
+    "coordinates": [38.5615979, -121.4246854],
+    "description": "Near the elevator and stairs. On the same path as Lecture hall 122",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/alpine-1.jpeg", "/photos/alpine-2.jpeg","/photos/alpine-3.jpeg"]
   },
   {
     "id": "amador-vending",
     "place": "Amador Hall Vending Machine",
-    "coordinates": [38.555, -121.42287375867112],
-    "description": "-",
+    "coordinates": [38.5589988, -121.4246646],
+    "description": "Across the elevators, near the entrance",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/amador-1.jpeg","/photos/amador-2.jpeg","/photos/amador-3.jpeg"]
   },
   {
     "id": "brighton-vending",
     "place": "Brighton Hall Vending Machine",
-    "coordinates": [38.57775, -121.42287375867112],
-    "description": "-",
-    "type": ["vending"],
-    "photos":[]
-  },
-  {
-    "id": "douglass-vending",
-    "place": "Douglass Hall Vending Machine",
-    "coordinates": [38.52285, -121.42287375867112],
-    "description": "-",
+    "coordinates": [38.5611543, -121.4245057],
+    "description": "Across the elevator. On he same path as Lecture Hall 104",
     "type": ["vending"],
     "photos":[]
   },
   {
     "id": "lassen-vending",
     "place": "Lassen Hall Vending Machine",
-    "coordinates": [38.54444, -121.42287375867112],
-    "description": "-",
+    "coordinates": [38.5628306, -121.4257526],
+    "description": "Opposite the academic advising and career center",
     "type": ["vending"],
-    "photos":[]
-  },
-  {
-    "id": "library-vending",
-    "place": "Library Vending Machine",
-    "coordinates": [38.4555, -121.42287375867112],
-    "description": "-",
-    "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/lassen-1.jpeg","/photos/lassen-2.jpeg"]
   },
   {
     "id": "library-microwave",
     "place": "Library Microwave",
-    "coordinates": [38.4555, -121.42287375867112],
-    "description": "-",
+    "coordinates": [38.5598459, -121.4240031],
+    "description": "Inside Grumpy Mule, on the left",
     "type": ["microwave"],
     "photos":[]
   },
   {
     "id": "mendocino-hall",
     "place": "Mendocino Hall Vending Machine",
-    "coordinates": [38.5533, -121.42287375867112],
-    "description": "1st floor near elevators",
+    "coordinates": [38.5627192, -121.4233406],
+    "description": "1st floor near lecture hall 1003 and elevators",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/mendocino-1.jpeg","/photos/mendocino-2.jpeg","/photos/mendocino-3.jpeg"]
   },
   {
-    "id": "placer-hall",
-    "place": "Placer Hall Vending Machine",
-    "coordinates": [38.58883, -121.42287375867112],
-    "description": "1st floor near elevators",
+    "id": "mariposa-hall",
+    "place": "Mariposa Hall Vending Machine",
+    "coordinates": [38.5615987, -121.4249392],
+    "description": "At the entrance. Opposite calaveras hall",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/mariposa-1.jpeg","/photos/mariposa-2.jpeg","/photos/mariposa-3.jpeg"]
   },
   {
     "id": "riverside-vending",
     "place": "Riverside Hall Vending Machines",
-    "coordinates": [38.56275, -121.42175],
+    "coordinates": [38.5609134, -121.4225222],
     "description": "In the corner beside the elevators",
     "type": ["vending"],
     "photos": [
     "/photos/riverside-1.jpeg",
-    "/photos/riverside-2.jpeg"
+    "/photos/riverside-2.jpeg",
+    "/photos/riverside-3.jpeg"
   ]
-  },
-  {
-    "id": "sacramento-hall",
-    "place": "Sacramento Hall Vending Machine",
-    "coordinates": [38.6777, -121.42287375867112],
-    "description": "1st floor near elevators",
-    "type": ["vending"],
-    "photos":[]
-  },
-  {
-    "id": "tahoe-hall",
-    "place": "Tahoe Hall Vending Machine",
-    "coordinates": [38.5533, -121.42287375867112],
-    "description": "1st floor near elevators",
-    "type": ["vending"],
-    "photos":[]
   },
   {
     "id": "the-well",
     "place": "The WELL Vending Machine",
-    "coordinates": [38.5533, -121.42287375867112],
-    "description": "1st floor near elevators",
+    "coordinates": [38.5567244, -121.4236775],
+    "description": "1st floor near elevators, after locker room. 2nd floor near the running track",
     "type": ["vending"],
-    "photos":[]
-  },
-  {
-    "id": "union-microwave",
-    "place": "University Union Microwave",
-    "coordinates": [38.5607, -121.4232],
-    "description": "Near food court seating",
-    "type": ["microwave"],
-    "photos":[]
+    "photos":["/photos/thewell1st-1.jpeg","/photos/thewell1st-2.jpeg",
+              "/photos/thewell1st-3.jpeg","/photos/thewell2nd-1.jpeg",
+              "/photos/thewell2nd-2.jpeg"]
   },
   {
     "id": "union-vending",
     "place": "University Union Vending Machine",
-    "coordinates": [38.5603, -121.4232],
-    "description": "Near food court seating",
+    "coordinates": [38.5596387, -121.4225453],
+    "description": "Beside Jamba Juice",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/union-1.jpeg","/photos/union-2.jpeg",
+            "/photos/union-3.jpeg","/photos/union-4.jpeg"]
   }
 ]
