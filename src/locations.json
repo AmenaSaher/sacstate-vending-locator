@@ -29,9 +29,9 @@
     "id": "brighton-vending",
     "place": "Brighton Hall Vending Machine",
     "coordinates": [38.5611543, -121.4245057],
-    "description": "Across the elevator. On he same path as Lecture Hall 104",
+    "description": "Across the elevator. On the same path as Lecture Hall 104",
     "type": ["vending"],
-    "photos":[]
+    "photos":["/photos/brighton-1.jpeg","/photos/brighton-2.jpeg"]
   },
   {
     "id": "lassen-vending",
