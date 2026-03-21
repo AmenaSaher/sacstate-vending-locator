@@ -1,1 +1,1 @@
-campus map app to help students quickly find nearby vending machines and microwaves with real photos, filters, and directions.
+Web application to find vending machines and microwaves near you (Sac State)
