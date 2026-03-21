@@ -34,12 +34,28 @@
     "photos":["/photos/brighton-1.jpeg","/photos/brighton-2.jpeg"]
   },
   {
+    "id": "douglass-vending",
+    "place": "Douglass Hall Vending Machine",
+    "coordinates": [38.5626589, -121.4243126],
+    "description": "Near Lecture Hall 111, 1st floor, near stairs",
+    "type": ["vending"],
+    "photos":["/photos/douglass-vending1.jpeg","/photos/douglass-vending2.jpeg"]
+  },
+  {
     "id": "lassen-vending",
     "place": "Lassen Hall Vending Machine",
     "coordinates": [38.5628306, -121.4257526],
     "description": "Opposite the academic advising and career center",
     "type": ["vending"],
     "photos":["/photos/lassen-1.jpeg","/photos/lassen-2.jpeg"]
+  },
+  {
+    "id": "library-vending",
+    "place": "Library Vending Machine",
+    "coordinates": [38.5598438, -121.4232514],
+    "description": "3rd Floor, across the elevators",
+    "type": ["vending"],
+    "photos":["/photos/library-vending.jpeg"]
   },
   {
     "id": "library-microwave",
