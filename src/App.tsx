@@ -3,6 +3,32 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps
 import locationsRaw from "./locations.json";
 import type { Place } from "./types";
 
+async function testAI() {
+  try {
+    const res = await fetch("/.netlify/functions/parse-search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: "coffee vending near library",
+      }),
+    });
+
+    const data = await res.json();
+    console.log("AI response:", data);
+
+    if (!res.ok) {
+      alert(data.error || "AI test failed");
+      return;
+    }
+
+    alert(JSON.stringify(data));
+  } catch (err) {
+    console.error(err);
+    alert("AI test failed");
+  }
+}
 function toRad(deg: number) {
   return (deg * Math.PI) / 180;
 }
@@ -206,7 +232,7 @@ export default function App() {
         >
           Use my location
         </button>
-
+<button onClick={testAI}>Test AI</button>
         <div
           style={{
             position: "absolute",
