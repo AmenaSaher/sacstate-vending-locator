@@ -69,18 +69,31 @@ User query: "${query}"
     const data = await res.json();
     const text = data.content?.[0]?.text ?? "{}";
 
-    let parsed;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      return new Response(
-        JSON.stringify({ error: "Claude returned invalid JSON", raw: text }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+// Extract JSON from Claude response
+const match = text.match(/\{[\s\S]*\}/);
+
+if (!match) {
+  return new Response(
+    JSON.stringify({ error: "No JSON found", raw: text }),
+    {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
     }
+  );
+}
+
+let parsed;
+try {
+  parsed = JSON.parse(match[0]);
+} catch {
+  return new Response(
+    JSON.stringify({ error: "Invalid JSON format", raw: text }),
+    {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+}
 
     return new Response(JSON.stringify(parsed), {
       status: 200,
