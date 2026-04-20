@@ -38,7 +38,8 @@ Rules:
 
 User query: "${query}"
 `.trim();
-
+console.log("ANTHROPIC_API_KEY exists:", !!process.env.ANTHROPIC_API_KEY);
+console.log("ANTHROPIC_API_KEY prefix:", process.env.ANTHROPIC_API_KEY?.slice(0, 10));
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {

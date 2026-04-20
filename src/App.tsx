@@ -3,32 +3,6 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps
 import locationsRaw from "./locations.json";
 import type { Place } from "./types";
 
-async function testAI() {
-  try {
-    const res = await fetch("/.netlify/functions/parse-search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: "coffee vending near library",
-      }),
-    });
-
-    const data = await res.json();
-    console.log("AI response:", data);
-
-    if (!res.ok) {
-      alert(data.error || "AI test failed");
-      return;
-    }
-
-    alert(JSON.stringify(data));
-  } catch (err) {
-    console.error(err);
-    alert("AI test failed");
-  }
-}
 function toRad(deg: number) {
   return (deg * Math.PI) / 180;
 }
@@ -70,8 +44,15 @@ export default function App() {
   const [nearestOpen, setNearestOpen] = useState(false);
   const [filter, setFilter] = useState<"all" | "vending" | "microwave">("all");
   const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-
   const [pulseSize, setPulseSize] = useState(0);
+
+  const [aiQuery, setAiQuery] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
+  const [aiResult, setAiResult] = useState<{
+    type: "vending" | "microwave" | null;
+    keyword: string | null;
+  } | null>(null);
 
   React.useEffect(() => {
     if (!isLoaded) return;
@@ -81,8 +62,28 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isLoaded]);
 
-  const filteredLocations =
-    filter === "all" ? locations : locations.filter((loc) => loc.type.includes(filter));
+  const effectiveType =
+    aiResult?.type ?? (filter === "all" ? null : filter);
+
+  const effectiveKeyword = aiResult?.keyword?.toLowerCase() ?? null;
+
+  const filteredLocations = locations.filter((loc) => {
+    const matchesType = effectiveType ? loc.type.includes(effectiveType) : true;
+
+    const haystack = [
+      loc.place,
+      loc.description ?? "",
+      ...(loc.type ?? []),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    const matchesKeyword = effectiveKeyword
+      ? haystack.includes(effectiveKeyword)
+      : true;
+
+    return matchesType && matchesKeyword;
+  });
 
   function directionsUrl(place: Place) {
     const [destLat, destLng] = place.coordinates;
@@ -109,6 +110,37 @@ export default function App() {
     );
   }
 
+  async function runAISearch() {
+  if (!aiQuery.trim()) return;
+
+  setAiLoading(true);
+  setAiError("");
+
+  try {
+    const res = await fetch("/.netlify/functions/parse-search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query: aiQuery }),
+    });
+
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : {};
+
+    if (!res.ok) {
+      throw new Error(data.error || "AI search failed");
+    }
+
+    setAiResult(data);
+    setSelected(null);
+  } catch (err) {
+    setAiError(err instanceof Error ? err.message : "AI search failed");
+  } finally {
+    setAiLoading(false);
+  }
+}
+
   const nearestList = useMemo(() => {
     if (!userCoords) return [];
 
@@ -124,9 +156,10 @@ export default function App() {
 
   React.useEffect(() => {
     if (!selected) return;
-    const stillVisible = filter === "all" || selected.type.includes(filter);
+
+    const stillVisible = filteredLocations.some((loc) => loc.id === selected.id);
     if (!stillVisible) setSelected(null);
-  }, [filter, selected]);
+  }, [filteredLocations, selected]);
 
   if (loadError) return <div>Map failed to load</div>;
   if (!isLoaded) return <div>Loading map...</div>;
@@ -232,7 +265,7 @@ export default function App() {
         >
           Use my location
         </button>
-<button onClick={testAI}>Test AI</button>
+
         <div
           style={{
             position: "absolute",
@@ -294,6 +327,79 @@ export default function App() {
             Microwave
           </button>
         </div>
+
+        <div
+          style={{
+            marginTop: 60,
+            background: "white",
+            padding: 8,
+            borderRadius: 12,
+            border: "1px solid #eee",
+            width: 260,
+          }}
+        >
+          <input
+            value={aiQuery}
+            onChange={(e) => setAiQuery(e.target.value)}
+            placeholder="Try: coffee vending near library"
+            style={{
+              width: "100%",
+              padding: "8px 10px",
+              borderRadius: 8,
+              border: "1px solid #ddd",
+              marginBottom: 8,
+              color: "black",
+            }}
+          />
+
+          <div style={{ display: "flex", gap: 6 }}>
+            <button
+              onClick={runAISearch}
+              disabled={aiLoading}
+              style={{
+                padding: "8px 10px",
+                borderRadius: 8,
+                border: "1px solid #ddd",
+                background: "white",
+                cursor: "pointer",
+                color: "black",
+                fontWeight: 600,
+              }}
+            >
+              {aiLoading ? "Searching..." : "AI Search"}
+            </button>
+
+            <button
+              onClick={() => {
+                setAiQuery("");
+                setAiResult(null);
+                setAiError("");
+              }}
+              style={{
+                padding: "8px 10px",
+                borderRadius: 8,
+                border: "1px solid #ddd",
+                background: "white",
+                cursor: "pointer",
+                color: "black",
+              }}
+            >
+              Clear
+            </button>
+          </div>
+
+          {aiResult && (
+            <div style={{ marginTop: 8, fontSize: 12, color: "black" }}>
+              AI parsed: type = {aiResult.type ?? "none"}, keyword = {aiResult.keyword ?? "none"}
+            </div>
+          )}
+
+          {aiError && (
+            <div style={{ marginTop: 8, fontSize: 12, color: "red" }}>
+              {aiError}
+            </div>
+          )}
+        </div>
       </div>
 
       {userCoords && (
@@ -313,7 +419,7 @@ export default function App() {
                   color: "black",
                 }}
               >
-                Nearest ({filter}) {nearestOpen ? "▲" : "▼"}
+                Nearest ({aiResult?.type ?? filter}) {nearestOpen ? "▲" : "▼"}
               </button>
 
               {nearestOpen && (
@@ -366,7 +472,7 @@ export default function App() {
             <div
               style={{
                 position: "absolute",
-                top: 160,
+                top: 280,
                 left: 12,
                 zIndex: 3000,
                 background: "white",
@@ -377,7 +483,9 @@ export default function App() {
                 boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
               }}
             >
-              <div style={{ fontWeight: 800, marginBottom: 8 }}>Nearest ({filter})</div>
+              <div style={{ fontWeight: 800, marginBottom: 8 }}>
+                Nearest ({aiResult?.type ?? filter})
+              </div>
 
               {nearestList.length === 0 ? (
                 <div style={{ fontSize: 13, opacity: 0.7 }}>No locations match this filter.</div>
@@ -452,7 +560,7 @@ export default function App() {
           <div style={{ fontWeight: 800 }}>{selected.place}</div>
 
           {selected.description && (
-            <div style={{ fontSize: 13, marginTop: 6}}>{selected.description}</div>
+            <div style={{ fontSize: 13, marginTop: 6 }}>{selected.description}</div>
           )}
 
           <div style={{ marginTop: 10 }}>

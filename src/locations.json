@@ -111,5 +111,14 @@
     "type": ["vending"],
     "photos":["/photos/union-1.jpeg","/photos/union-2.jpeg",
             "/photos/union-3.jpeg","/photos/union-4.jpeg"]
-  }
+  },  
+ {
+  "id": "union-microwave",
+    "place": "University Union Microwave",
+    "coordinates": [38.559940, -121.421907],
+    "description": "cafeteria near good eats",
+    "type": ["microwave"],
+    "photos":["/photos/union-microwave-1.jpg","/photos/union-microwave-2.jpg",
+            "/photos/union-microwave-3.jpg"]
+}
 ]
