@@ -62,28 +62,71 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isLoaded]);
 
-  const effectiveType =
-    aiResult?.type ?? (filter === "all" ? null : filter);
+const effectiveType =
+  aiResult?.type ?? (filter === "all" ? null : filter);
 
-  const effectiveKeyword = aiResult?.keyword?.toLowerCase() ?? null;
+const effectiveKeyword = aiResult?.keyword?.toLowerCase().trim() ?? null;
 
-  const filteredLocations = locations.filter((loc) => {
-    const matchesType = effectiveType ? loc.type.includes(effectiveType) : true;
+const baseTypeFiltered = locations.filter((loc) =>
+  effectiveType ? loc.type.includes(effectiveType) : true
+);
 
-    const haystack = [
-      loc.place,
-      loc.description ?? "",
-      ...(loc.type ?? []),
+const isNearbyStyleQuery =
+  effectiveKeyword
+    ? effectiveKeyword.includes("near") ||
+      effectiveKeyword.includes("by ") ||
+      effectiveKeyword.includes("close to")
+    : false;
+
+const strongMatches = effectiveKeyword
+  ? baseTypeFiltered.filter((loc) => {
+      const strongHaystack = [
+        loc.place,
+        ...(loc.aliases ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return strongHaystack.includes(effectiveKeyword);
+    })
+  : baseTypeFiltered;
+
+const nearbyMatches = effectiveKeyword
+  ? baseTypeFiltered.filter((loc) => {
+      const nearbyHaystack = [...(loc.nearby ?? [])]
+        .join(" ")
+        .toLowerCase();
+
+      return nearbyHaystack.includes(effectiveKeyword);
+    })
+  : baseTypeFiltered;
+
+const weakMatches = effectiveKeyword
+  ? baseTypeFiltered.filter((loc) => {
+      const weakHaystack = [
+        loc.description ?? "",
+        ...(loc.type ?? []),
+        ...(loc.nearby ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return weakHaystack.includes(effectiveKeyword);
+    })
+  : baseTypeFiltered;
+
+const filteredLocations = !effectiveKeyword
+  ? baseTypeFiltered
+  : isNearbyStyleQuery
+  ? [
+      ...strongMatches,
+      ...nearbyMatches.filter(
+        (nearbyLoc) => !strongMatches.some((strongLoc) => strongLoc.id === nearbyLoc.id)
+      ),
     ]
-      .join(" ")
-      .toLowerCase();
-
-    const matchesKeyword = effectiveKeyword
-      ? haystack.includes(effectiveKeyword)
-      : true;
-
-    return matchesType && matchesKeyword;
-  });
+  : strongMatches.length > 0
+  ? strongMatches
+  : weakMatches;
 
   function directionsUrl(place: Place) {
     const [destLat, destLng] = place.coordinates;
@@ -339,18 +382,24 @@ export default function App() {
           }}
         >
           <input
-            value={aiQuery}
-            onChange={(e) => setAiQuery(e.target.value)}
-            placeholder="Try: coffee vending near library"
-            style={{
-              width: "100%",
-              padding: "8px 10px",
-              borderRadius: 8,
-              border: "1px solid #ddd",
-              marginBottom: 8,
-              color: "black",
-            }}
-          />
+  value={aiQuery}
+  onChange={(e) => setAiQuery(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runAISearch();
+    }
+  }}
+  placeholder="Try: coffee vending near library"
+  style={{
+    width: "100%",
+    padding: "8px 10px",
+    borderRadius: 8,
+    border: "1px solid #ddd",
+    marginBottom: 8,
+    color: "black",
+  }}
+/>
 
           <div style={{ display: "flex", gap: 6 }}>
             <button
@@ -366,7 +415,7 @@ export default function App() {
                 fontWeight: 600,
               }}
             >
-              {aiLoading ? "Searching..." : "AI Search"}
+              {aiLoading ? "Searching..." : "Search"}
             </button>
 
             <button

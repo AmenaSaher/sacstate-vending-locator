@@ -34,7 +34,11 @@ Rules:
 - If the user mentions vending, snacks, soda, chips, coffee machine, or drinks, use "vending".
 - If the user mentions microwave, use "microwave".
 - If no type is clear, use null.
-- "keyword" should be the main building name or descriptor if present, otherwise null.
+- If the user includes location phrases like "near", "by", or "close to", keep the full phrase in "keyword".
+  Examples:
+  - "near alpine hall" -> "keyword": "near alpine hall"
+  - "by parking lot 1" -> "keyword": "by parking lot 1"
+- Otherwise, use the main building name or descriptor as "keyword".
 
 User query: "${query}"
 `.trim();

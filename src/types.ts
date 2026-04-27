@@ -5,4 +5,6 @@ export type Place = {
   description?: string;
   photos?: string[];
   type: string[]; // ["vending"] or ["microwave"]
+  aliases?: string[];
+  nearby?: string[];
 };
