@@ -397,6 +397,7 @@ const filteredLocations = !effectiveKeyword
     borderRadius: 8,
     border: "1px solid #ddd",
     marginBottom: 8,
+    background:'white',
     color: "black",
   }}
 />
